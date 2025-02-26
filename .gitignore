@@ -38,7 +38,6 @@ Thumbs.db
 
 # Environment variables and credentials
 .env
-application.properties
 application.yml
 application-dev.properties
 application-prod.properties
