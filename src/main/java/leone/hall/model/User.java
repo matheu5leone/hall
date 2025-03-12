@@ -1,8 +1,6 @@
 package leone.hall.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import leone.hall.enums.UserRole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,10 +15,14 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String password;
     private UserRole role;
+
+    public User() {
+    }
 
     public User(String name, String password, UserRole role){
         this.name = name;
@@ -36,7 +38,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
