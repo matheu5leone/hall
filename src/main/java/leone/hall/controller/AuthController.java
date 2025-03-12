@@ -33,6 +33,7 @@ public class AuthController {
         var auth = authenticationManager.authenticate(userPassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
+        System.out.println("Request login recebida");
         return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(token));
     }
 
@@ -43,13 +44,15 @@ public class AuthController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(), encryptedPassword, data.role());
-
         this.repository.save(newUser);
-        return ResponseEntity.status(HttpStatus.OK).build();
+
+        System.out.println("Request register recebida");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/echo")
     public ResponseEntity<String> echo(){
+        System.out.println("Request echo recebida");
         return ResponseEntity.status(HttpStatus.OK).body("ECHO!");
     }
 
